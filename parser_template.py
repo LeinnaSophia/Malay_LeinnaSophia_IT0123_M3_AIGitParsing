@@ -15,7 +15,22 @@ import yaml
 def parse_xml(path: str | Path) -> dict:
     """Return default_operation and test_option from the NETCONF-style XML."""
     # TODO: parse the XML, handle its default namespace, and return two strings.
-    raise NotImplementedError("Complete parse_xml")
+    import re 
+
+    xml = ET.parse(path)
+    root = xml.getroot()
+
+    ns = re.match(r'\{(.*)\}', root.tag).group(1)
+    editconf = root.find("{{{}}}edit-config".format(ns))
+
+    default_operation = editconf.find("{{{}}}default-operation".format(ns))
+    test_option = editconf.find("{{{}}}test-option".format(ns))
+
+    return {
+        "default_operation": default_operation.text,
+        "test_option": test_option.text 
+    }
+
 
 
 def parse_json(path: str | Path) -> dict:
