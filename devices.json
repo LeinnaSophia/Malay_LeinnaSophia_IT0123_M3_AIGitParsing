@@ -1,0 +1,23 @@
+{
+  "site": "FEU-Tech-Lab",
+  "devices": [
+    {
+      "hostname": "R1",
+      "management_ip": "192.0.2.10",
+      "role": "router",
+      "enabled": true
+    },
+    {
+      "hostname": "SW1",
+      "management_ip": "192.0.2.20",
+      "role": "switch",
+      "enabled": true
+    },
+    {
+      "hostname": "AP1",
+      "management_ip": "192.0.2.30",
+      "role": "wireless-ap",
+      "enabled": false
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rpc message-id="101" xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
+  <edit-config>
+    <target>
+      <candidate />
+    </target>
+    <default-operation>merge</default-operation>
+    <test-option>test-then-set</test-option>
+    <config>
+      <interface xmlns="urn:example:network">
+        <name>GigabitEthernet1</name>
+        <enabled>true</enabled>
+      </interface>
+    </config>
+  </edit-config>
+</rpc>

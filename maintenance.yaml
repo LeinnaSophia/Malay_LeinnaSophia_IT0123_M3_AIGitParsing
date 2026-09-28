@@ -1,0 +1,8 @@
+window:
+  name: Saturday-Lab
+  approved: true
+  duration_minutes: 90
+devices:
+  - R1
+  - SW1
+action: validate-configuration
