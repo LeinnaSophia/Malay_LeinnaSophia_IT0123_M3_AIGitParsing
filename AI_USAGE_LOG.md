@@ -225,12 +225,83 @@ test_yaml_window (test_parser.ParserTests.test_yaml_window) ... ERROR
 ## Entry 3 - YAML parsing and integration
 
 Prompt:
+I am completing an authorized classroom Python lab.
+Review this function stub and the supplied fictional YAML structure.
+Recommend an implementation that returns exactly the keys described in the docstring.
+Explain namespace handling, data types, error risks, and each library function used.
+Do not invent files, credentials, network calls, or expected test results.
+I will validate your recommendation using unit tests and Git diffs.
+
+Function stub:
+def parse_yaml(path: str | Path) -> dict:
+    """Return name, approved, duration_minutes, devices, and action from YAML."""
+    # TODO: use yaml.safe_load and return the normalized maintenance summary.
+    raise NotImplementedError("Complete parse_yaml")
+
+
+Relevant fictional data: 
+window:  
+  name: Saturday-Lab 
+  approved: true  
+  duration_minutes: 90  
+devices: 
+  - R1
+  - SW1
+action: validate-configuration  
 
 AI recommendation summary:
+Suggested Code:
+from __future__ import annotations
 
-Decision: accepted / modified / rejected
+from pathlib import Path
+import yaml
+
+
+def parse_yaml(path: str | Path) -> dict:
+    """Return name, approved, duration_minutes, devices, and action from YAML."""
+    with open(path, "r", encoding="utf-8") as fh:
+        data = yaml.safe_load(fh)
+
+    window = data["window"]
+
+    return {
+        "name": window["name"],
+        "approved": window["approved"],
+        "duration_minutes": window["duration_minutes"],
+        "devices": data["devices"],
+        "action": data["action"],
+    }
+
+The AI suggested using __future__, pathlib, and yaml. It opened the YAML file in read mode using with encoding="utf-8" and loaded it using yaml.safe_load() so the file does not depend on the OS default encoding. It also stored data["window"] in a variable called window so the return block would not have to repeat the nested lookup three times for efficient data retrieval. The rest of the return dict pulls devices and action straight from the top level.
+
+Decision: modified
+My Code:
+def parse_yaml(path: str | Path) -> dict:
+    """Return name, approved, duration_minutes, devices, and action from YAML."""
+    # TODO: use yaml.safe_load and return the normalized maintenance summary.
+
+    with open(path, "r") as yaml_file:
+        data = yaml.safe_load(yaml_file)
+
+    return {
+        "name": data["window"]["name"],
+        "approved": data["window"]["approved"],
+        "duration_minutes": data["window"]["duration_minutes"],
+        "devices": data["devices"],
+        "action": data["action"]
+    }
+
+Mine returns the same dict as the AI's version for this data, so the parsing logic is the same. Like in my previous codes, I used the method from the "Parse Different Data Types with Python" lab. The differences are that I did not use the __future__ import, I did not add encoding="utf-8" to open, and I did not store data["window"] in a variable and instead used direct indexing in the return block. The missing encoding is the one that could matter if the file ever has non-ASCII text, since it would then fall back to the OS default.
 
 Validation evidence:
+leinna_sophia@Sophie-Laptop:~/it0123-module3-ai-git-parsing$ python3 -m unittest -v
+test_combined_summary (test_parser.ParserTests.test_combined_summary) ... ERROR
+test_json_device_count (test_parser.ParserTests.test_json_device_count) ... ok
+test_json_enabled_devices (test_parser.ParserTests.test_json_enabled_devices) ... ok
+test_json_roles (test_parser.ParserTests.test_json_roles) ... ok
+test_xml_default_operation (test_parser.ParserTests.test_xml_default_operation) ... ok
+test_xml_test_option (test_parser.ParserTests.test_xml_test_option) ... ok
+test_yaml_window (test_parser.ParserTests.test_yaml_window) ... ok
 
 ## Controlled merge-conflict line
 
