@@ -66,7 +66,12 @@ def parse_yaml(path: str | Path) -> dict:
 def build_summary(xml_path: str | Path, json_path: str | Path, yaml_path: str | Path) -> dict:
     """Combine the three parser results into one dictionary."""
     # TODO: call the three parser functions and preserve the keys below.
-    raise NotImplementedError("Complete build_summary")
+    return {
+        "xml": parse_xml(xml_path),
+        "json": parse_json(json_path),
+        "yaml": parse_yaml(yaml_path)
+    }
+
 
 
 if __name__ == "__main__":
