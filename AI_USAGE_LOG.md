@@ -305,7 +305,7 @@ test_yaml_window (test_parser.ParserTests.test_yaml_window) ... ok
 
 ## Controlled merge-conflict line
 
-Validation status: PENDING
+Validation status: Tests passed 
 
 ## Final reflection
 
