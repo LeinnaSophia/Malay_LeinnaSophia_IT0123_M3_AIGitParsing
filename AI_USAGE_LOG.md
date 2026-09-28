@@ -132,12 +132,95 @@ test_yaml_window (test_parser.ParserTests.test_yaml_window) ... ERROR
 ## Entry 2 - JSON parsing
 
 Prompt:
+I am completing an authorized classroom Python lab.
+Review this function stub and the supplied fictional JSON structure.
+Recommend an implementation that returns exactly the keys described in the docstring.
+Explain namespace handling, data types, error risks, and each library function used.
+Do not invent files, credentials, network calls, or expected test results.
+I will validate your recommendation using unit tests and Git diffs.
+
+Function stub:
+def parse_json(path: str | Path) -> dict:
+    """Return site, device_count, enabled_devices, and roles from the JSON."""
+    # TODO: use json.load and derive the requested summary values.
+    raise NotImplementedError("Complete parse_json")
+
+Relevant fictional data: 
+{
+  "site": "FEU-Tech-Lab",
+  "devices": [  
+    {
+      "hostname": "R1",
+      "management_ip": "192.0.2.10",
+      "role": "router",
+      "enabled": true
+    },
+    {
+      "hostname": "SW1",
+      "management_ip": "192.0.2.20",
+      "role": "switch",
+      "enabled": true
+    },
+    {
+      "hostname": "AP1",
+      "management_ip": "192.0.2.30",
+      "role": "wireless-ap",
+      "enabled": false
+    }
+  ]
+}
 
 AI recommendation summary:
+Suggested code:
+from __future__ import annotations
 
-Decision: accepted / modified / rejected
+from pathlib import Path
+import json
+
+
+def parse_json(path: str | Path) -> dict:
+    """Return site, device_count, enabled_devices, and roles from the JSON."""
+    with open(path, "r", encoding="utf-8") as fh:
+        data = json.load(fh)
+
+    devices = data["devices"]
+
+    return {
+        "site": data["site"],
+        "device_count": len(devices),
+        "enabled_devices": sum(1 for d in devices if d["enabled"]),
+        "roles": [d["role"] for d in devices],
+    }
+
+This code used the annotations module from the __future__ library and the Path module from the pathlib library. It uses the open function and json.load() to open the JSON file in read mode and then load it, and includes encoding="utf-8" to provide a defined encoding format rather than relying on the OS locale, which might otherwise need adjusting. It also stores data["devices"] in the variable devices for more efficient access. It returns the site, the device count using the length of the devices array, and for enabled_devices, it counts the number of devices with the "enabled" field set to True. The code also uses d as an alias for each device in the iteration. For roles, it uses a list comprehension to return a list of the role of each device.
+
+Decision: modified
+My code:
+def parse_json(path: str | Path) -> dict:
+    """Return site, device_count, enabled_devices, and roles from the JSON."""
+    # TODO: use json.load and derive the requested summary values.
+
+    with open(path, "r") as json_file:
+        data = json.load(json_file)
+
+    return {
+        "site": data["site"],
+        "device_count": len(data["devices"]),
+        "enabled_devices": [device["hostname"] for device in data["devices"] if device["enabled"]],
+        "roles": [device["role"] for device in data["devices"]]
+    }
+
+I also used the method taught in the "Parse Different Data Types with Python" lab for this, and I found it to be a simpler and more straightforward implementation than what the AI suggested. It looks the same, but with minor differences. First, I used different variable names. Second, I did not store data["devices"] in another variable and instead accessed its contents directly in my return block. For enabled_devices, since the docstring in the function stub did not explicitly say that I should count the number of enabled devices, I returned a list of their hostnames instead.
 
 Validation evidence:
+leinna_sophia@Sophie-Laptop:~/it0123-module3-ai-git-parsing$ python3 -m unittest -v
+test_combined_summary (test_parser.ParserTests.test_combined_summary) ... ERROR
+test_json_device_count (test_parser.ParserTests.test_json_device_count) ... ok
+test_json_enabled_devices (test_parser.ParserTests.test_json_enabled_devices) ... ok
+test_json_roles (test_parser.ParserTests.test_json_roles) ... ok
+test_xml_default_operation (test_parser.ParserTests.test_xml_default_operation) ... ok
+test_xml_test_option (test_parser.ParserTests.test_xml_test_option) ... ok
+test_yaml_window (test_parser.ParserTests.test_yaml_window) ... ERROR
 
 ## Entry 3 - YAML parsing and integration
 
