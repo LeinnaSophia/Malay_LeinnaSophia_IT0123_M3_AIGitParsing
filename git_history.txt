@@ -1,10 +1,28 @@
-* commit c940003eb0da8c00588053d04fa34f6d0293c78a (origin/main)
+* commit 1b49f698e7ed300f7e8be587454df910dabea743 (HEAD -> main, origin/main)
 | Author: LeinnaSophia <malay.ls0601@gmail.com>
-| Date:   Mon Sep 28 23:39:13 2026 +0800
+| Date:   Tue Sep 29 09:10:21 2026 +0800
+| 
+|     docs: cleaned status log
+| 
+* commit 00f6bf84aa24cf62c6fc718738561630cce9e815
+| Author: LeinnaSophia <malay.ls0601@gmail.com>
+| Date:   Tue Sep 29 09:07:53 2026 +0800
+| 
+|     docs: cleaned status log
+| 
+* commit b44652cb914d50551964b67c3f597a65749b8d42
+| Author: LeinnaSophia <malay.ls0601@gmail.com>
+| Date:   Tue Sep 29 09:03:20 2026 +0800
+| 
+|     docs: cleaning working status by finalizing the README_template.md deletion
+| 
+* commit 9ebaff9dc977d74e0c3e6dcde9a112dfa3b92a65
+| Author: LeinnaSophia <malay.ls0601@gmail.com>
+| Date:   Tue Sep 29 08:43:41 2026 +0800
 | 
 |     docs: finalize validated lab evidence
 |   
-*   commit 374138c4bf7788fc9ff6ba2fb11fbcf930ca0ad5 (HEAD -> main)
+*   commit 374138c4bf7788fc9ff6ba2fb11fbcf930ca0ad5
 |\  Merge: 9e278fb c114b35
 | | Author: LeinnaSophia <malay.ls0601@gmail.com>
 | | Date:   Mon Sep 28 22:25:39 2026 +0800
