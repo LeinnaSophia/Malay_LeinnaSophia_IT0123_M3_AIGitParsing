@@ -1,0 +1,12 @@
+test_combined_summary (test_parser.ParserTests.test_combined_summary) ... ok
+test_json_device_count (test_parser.ParserTests.test_json_device_count) ... ok
+test_json_enabled_devices (test_parser.ParserTests.test_json_enabled_devices) ... ok
+test_json_roles (test_parser.ParserTests.test_json_roles) ... ok
+test_xml_default_operation (test_parser.ParserTests.test_xml_default_operation) ... ok
+test_xml_test_option (test_parser.ParserTests.test_xml_test_option) ... ok
+test_yaml_window (test_parser.ParserTests.test_yaml_window) ... ok
+
+----------------------------------------------------------------------
+Ran 7 tests in 0.014s
+
+OK
